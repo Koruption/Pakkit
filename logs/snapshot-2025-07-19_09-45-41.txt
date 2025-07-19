@@ -1,0 +1,33 @@
+=============== Snapshot started | time: 2025-07-19_09-45-39===============
+[dependency graph] build_deps() called: Dependency tree is: {} | trace: Trace: build_deps in /Users/juanfarias/Documents/engineering/python_projects/pakkit/simple_renderer.py at line 400 | time: 2025-07-19_09-45-39 | time: 2025-07-19_09-45-39
+Logged at 2025-07-19_09-45-39
+[render info] Starting render pass 0 | trace: Trace: render in /Users/juanfarias/Documents/engineering/python_projects/pakkit/simple_renderer.py at line 1060 | time: 2025-07-19_09-45-39 | time: 2025-07-19_09-45-39
+Logged at 2025-07-19_09-45-39
+[render info] Cleared screen at 1752936339.6020968.[render info] Will render 3 nodes.[render info] Nodes: ['Group', 'HomeDisplay', 'FileHandlerDisplay'].[render info] Node Info: [Group(
+        id=67121e48-1d76-4591-9c40-f192dfbec9e6,
+        disabled=False,
+        hide_after_render=True,
+        static=False,
+        is_dirty=True,
+        did_render=False
+        ), HomeDisplay(
+        id=54c31a85-e104-4646-8840-44946eb2b74a,
+        did_process_response=False,
+        disabled=False,
+        hide_after_render=False,
+        static=False,
+        is_dirty=True,
+        did_render=False
+        ), FileHandlerDisplay(
+        id=a9c6cb2e-c643-4c24-97a0-037e22b187ec,
+        did_process_response=False,
+        disabled=False,
+        hide_after_render=False,
+        static=False,
+        is_dirty=True,
+        did_render=False
+        )] | trace: Trace: render in /Users/juanfarias/Documents/engineering/python_projects/pakkit/simple_renderer.py at line 1061 | time: 2025-07-19_09-45-39 | time: 2025-07-19_09-45-39
+Logged at 2025-07-19_09-45-39
+[render info] Rendering Group | trace: Trace: render in /Users/juanfarias/Documents/engineering/python_projects/pakkit/simple_renderer.py at line 1097 | time: 2025-07-19_09-45-39 | time: 2025-07-19_09-45-39
+Logged at 2025-07-19_09-45-39
+=============== Snapshot ended | time: 2025-07-19_09-45-41===============
