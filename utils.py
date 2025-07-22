@@ -7,13 +7,18 @@ from typing import Any, Callable, List
 from enum import Enum
 from alive_progress import alive_bar, styles
 from alive_progress.styles import showtime
-from audio import TrackInfo
+
+# from audio import TrackInfo
 from rich.console import Console
 from rich.table import Table
 from rich.align import Align
+import shutil
+import textwrap
+
 
 def test():
-    return 
+    return
+
 
 class ForegroundColor(Enum):
     Black = 30
@@ -198,6 +203,7 @@ def bar_spinner(label: str, delay: float = 0.4, amount: int = 15):
     print("\n")
     return
 
+
 class BarSpinner:
 
     def __init__(self, label: str, delay: float = 0.4):
@@ -229,6 +235,7 @@ class BarSpinner:
         if self._thread is not None:
             self._thread.join()
         writ_to_line("")
+
 
 class AudioAnimation:
 
@@ -266,6 +273,7 @@ class AudioAnimation:
             self._thread.join()
         writ_to_line("")
 
+
 class AudioBar:
     def __init__(self, label="🎵 Playing track..."):
         self._stop = False
@@ -274,14 +282,15 @@ class AudioBar:
 
     def _run(self):
         from alive_progress import styles
+
         with alive_bar(
             total=None,
             title=self.label,
-            bar=styles.BARS['notes'],       # musical bouncing animation
-            spinner=styles.SPINNERS['pulse'],    # smooth flowing spinner
+            bar=styles.BARS["notes"],  # musical bouncing animation
+            spinner=styles.SPINNERS["pulse"],  # smooth flowing spinner
         ) as bar:
             while not self._stop:
-                bar()           # animate
+                bar()  # animate
                 time.sleep(0.1)
 
     def start(self):
@@ -295,6 +304,7 @@ class AudioBar:
         self._stop = True
         if self._thread:
             self._thread.join()
+
 
 class Messenger:
     def type_lines(self, lines: List[str], delay=0.05, new_line=True):
@@ -321,12 +331,18 @@ class Messenger:
 
 class NTable:
 
-    def __init__(self, title: str, columns: List[str], rows: List[List[str]], highlight_row_no: int = None):
+    def __init__(
+        self,
+        title: str,
+        columns: List[str],
+        rows: List[List[str]],
+        highlight_row_no: int = None,
+    ):
         self.columns = columns
         self.rows = rows
         self.console = Console()
         self.table = Table(title=title, expand=True)
-        
+
         for col in self.columns:
             self.table.add_column(col, justify="right", style="cyan", no_wrap=True)
         for row in self.rows:
@@ -339,5 +355,33 @@ class NTable:
         self.console.print(Align.center(self.table))
 
 
-def debug_log(*args, fg: ForegroundColor=ForegroundColor.White, bg: BackgroundColor=BackgroundColor.Black):
+def debug_log(
+    *args,
+    fg: ForegroundColor = ForegroundColor.White,
+    bg: BackgroundColor = BackgroundColor.Black,
+):
     print(ANSIColor(fg, bg).colorize("[DEBUG] " + " ".join(map(str, args))))
+
+
+def screen_width():
+    columns, rows = shutil.get_terminal_size()
+    return columns, rows
+
+
+def get_wrapped(text: str):
+    cols, _ = screen_width()
+    wrapped = textwrap.wrap(text, width=cols)
+    return wrapped
+
+class Keycode(Enum):
+    UP = "key_up"
+    DOWN = "key_down"
+    LEFT = "key_left"
+    RIGHT = "key_right"
+    A = "a"
+    B = "b"
+
+
+ANSIKeyCodes = {
+
+}

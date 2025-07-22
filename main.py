@@ -1,8 +1,10 @@
-from simple_renderer import Engine, Graphics, Point, Line, Rectangle, Animation
-from scenes.home.scene import Home
 import math
 import time
+from lib.primitives import Question, Selection, TypedText
 from utils import debug_log
+from lib.engine import Engine, Scene
+
+from lib.experiments import get_wrapped, text
 
 # def line():
 #     gfx = Graphics()
@@ -133,12 +135,11 @@ def init():
 
     # test()
 
-
-    engine = Engine(debug_mode=True, debug_silent=False)
-    engine.add_scenes({
-        "home": Home,
-    })
-    engine.start()
+    # engine = Engine(debug_mode=True, debug_silent=False)
+    # engine.add_scenes({
+    #     "home": Home,
+    # })
+    # engine.start()
 
     # while True:
     #     time.sleep(0.1)
@@ -148,6 +149,40 @@ def init():
     # for point in line:
     #     gfx.move(point).draw("*")
     # gfx.render()
+
+    # engine = Engine()
+    # engine.scenes.define(
+    #     {
+    #         "home": Scene(
+    #             [
+    #                 TypedText("Hello, welcome home!", delay=1),
+    #                 Question("What's your favorite music genre?").on(
+    #                     {
+    #                         "metal": Selection(
+    #                             "Favorite sub-genre?",
+    #                             choices=["djent", "black", "power"],
+    #                         ),
+    #                         "pop": [
+    #                             TypedText("Are you serious?! Pop Sucks!", 0.02),
+    #                             Question("Tell me what you like about pop lol").on(
+    #                                 {"": TypedText("Odd, I hate pop")}
+    #                             ),
+    #                         ],
+    #                     }
+    #                 ),
+    #                 TypedText("This is the end.. my only friend, the end..").then(
+    #                     lambda renderable: print(
+    #                         f"Goodbye... from {renderable.__class__.__name__}"
+    #                     )
+    #                 ),
+    #             ]
+    #         ),
+    #         "playback": Scene([TypedText("Welcome to the playback scene!")]),
+    #     }
+    # )
+    # engine.start()
+
+    print(len(get_wrapped(text)))
 
     return
 
