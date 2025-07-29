@@ -1,8 +1,9 @@
 from typing import List, Dict, OrderedDict
-from lib.diffing import DiffEngine
-from lib.primitives import Renderable
-from lib.events import EngineEvents
-from lib.renderer import Renderer
+from core.io import InputStream
+from core.diffing import DiffEngine
+from core.primitives import Renderable
+from core.events import EngineEvents
+from core.renderer import Renderer
 
 
 class Scene:
@@ -50,11 +51,17 @@ class Engine:
         self.diffing = DiffEngine()
         self.renderer = Renderer(self.events, self.diffing)
         self.render_thread = self.renderer.get_thread()
+        self.io = InputStream()
         return
+    
+    def cursor_watch(self):
+        return 
 
     def start(self):
         self.renderer.set_buffer(self.scenes.get_scene(self.scenes.current).layout)
         self.render_thread.start()
+        self.io.start()
 
     def stop(self):
         self.render_thread.join()
+        self.io.stop()

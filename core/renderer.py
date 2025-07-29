@@ -1,10 +1,10 @@
-from lib.primitives import Readable, Renderable
+from core.primitives import Readable, Renderable
 from typing import (
     List,
     TypeVar,
 )
-from lib.events import EngineEvents
-from lib.diffing import DiffEngine
+from core.events import EngineEvents
+from core.diffing import DiffEngine
 from threading import Thread
 import utils
 import time

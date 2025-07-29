@@ -18,7 +18,7 @@ class InputStream:
         self._io_thread:Thread = None
 
         InputStream.instance = self
-
+        
     def on(self, cb: Callable[[str], Any]):
         self._listeners.append(cb)
 
@@ -32,14 +32,15 @@ class InputStream:
         return 
     
     def poll(self):
-        tty.setraw(self._fd)
+        # tty.setraw(self._fd)
         try:
             while not self._stop_flag:
                 ch = sys.stdin.read(1)
                 self._dispatch_to_listeners(ch)
                 time.sleep(self._poll_frq)
         finally:
-            termios.tcsetattr(self._fd, termios.TCSADRAIN, self._old_settings)
+            pass
+            # termios.tcsetattr(self._fd, termios.TCSADRAIN, self._old_settings)
 
     def start(self):
         self._io_thread = Thread(target=self.poll)
@@ -67,4 +68,5 @@ class InputHandler:
 
     def __init__(self, stream: Stream):
         self.stream = stream
+        # TODO: In progress
         return 

@@ -1,4 +1,4 @@
-from lib.primitives import Renderable
+from core.primitives import Renderable
 from typing import Dict
 import zlib
 

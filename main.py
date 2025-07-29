@@ -1,10 +1,11 @@
-import math
 import time
-from lib.primitives import Question, Selection, TypedText
+from core.io import InputStream
+from core.primitives import Animatable
+from core.primitives import Question, Selection, TypedText
 from utils import debug_log
-from lib.engine import Engine, Scene
+from core.engine import Engine, Scene
 
-from lib.experiments import get_wrapped, text
+from core.tests import get_wrapped, text
 
 # def line():
 #     gfx = Graphics()
@@ -123,24 +124,7 @@ from lib.experiments import get_wrapped, text
 
 def init():
 
-    # session = Session()
-    # session.start()
-
-    # session.graphics.display_boot()
-    # session.io.write(
-    #     messages["start_prompt"],
-    #     OutputType.question,
-    #     lambda response: session.events.emit(SessionEvents.file_dropped, response),
-    # )
-
-    # test()
-
-    # engine = Engine(debug_mode=True, debug_silent=False)
-    # engine.add_scenes({
-    #     "home": Home,
-    # })
-    # engine.start()
-
+    # GRAPHICS EXAMPLES 
     # while True:
     #     time.sleep(0.1)
 
@@ -156,6 +140,7 @@ def init():
     #         "home": Scene(
     #             [
     #                 TypedText("Hello, welcome home!", delay=1),
+    #                 Animatable(fps=60, defer_render=False).alloc(15),
     #                 Question("What's your favorite music genre?").on(
     #                     {
     #                         "metal": Selection(
@@ -181,8 +166,19 @@ def init():
     #     }
     # )
     # engine.start()
+    
+    count = 0
+    def on_input(data):
+        print("INPUT: ", data)
 
-    print(len(get_wrapped(text)))
+    stream = InputStream()
+    stream.on(on_input)
+    stream.start()
+    while count < 10:
+        count += 1
+        time.sleep(0.5)
+    stream.stop()
+
 
     return
 
@@ -190,6 +186,8 @@ def init():
 if __name__ == "__main__":
 
     init()
+
+    # GRAPHICS TESTS
     # try:
     #     # sine_wave()
     #     # random_falling_star()

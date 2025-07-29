@@ -2,6 +2,9 @@ import questionary
 from typing import List, Callable, Any, Dict, Optional, Union
 import utils
 from uuid import uuid4
+from threading import Thread
+import time
+from .allocator import alloc
 
 
 class Renderable:
@@ -144,3 +147,45 @@ class Selection(Readable):
 
     def render(self):
         return questionary.select(self.prompt, choices=self.choices).ask()
+
+class Animatable(Renderable):
+
+    _processes: Dict[str, Thread] = {}
+
+    def __init__(self, fps: float = 60, defer_render=False):
+        self.fps = fps
+        self._suspend_anim = False
+        self._last_time = 0
+        super().__init__(self, defer_render=defer_render, cacheable=False)
+        Animatable._processes[self.id] = Thread(self.render)
+
+    def on_anim_frame(self, delta_time: float):
+        raise NotImplementedError("The on_anime_frame() is not implemented.") 
+
+    def on_end(self):
+        self._processes[self.id].join()
+        return 
+
+    def suspend(self):
+        self._suspend_anim = True
+
+    def resume(self):
+        self._suspend_anim = False
+
+    def _animation_loop(self):
+        while not self._suspend_anim:
+            now = time.time()
+            delta_time = now - self._last_time
+            self._last_time = now
+
+            self.on_anim_frame(delta_time)
+            time.sleep(self.fps)
+
+    def alloc(self, size, start=None, auto=True):
+        # set a flag to revisit on init and approximate start 
+        # line based on index in the scene graph
+        return alloc(size=size, start=start, auto=True)
+
+    def render(self):
+        Animatable._processes[self.id].start()
+        return 
