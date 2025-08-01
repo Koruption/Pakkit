@@ -1,3 +1,5 @@
+<img width="1856" height="1039" alt="Nerapakker with Pakker" src="https://github.com/user-attachments/assets/e96a7902-1c05-421c-89e2-eec88a239525" />
+
 # Pakkit (In Progress)
 
 Pakkit is a reactive framework for building expressive, animated, and stateful CLI applications. Think React-style components meet game engine render loops, all optimized for the terminal. I designed Pakkit for three primary reasons:
