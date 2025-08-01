@@ -263,20 +263,7 @@ Why CRC32?
 ### 🧪 Testing & Debugging (In progress)
 Use .render() manually from components to test output:
 print(RenderableObject().render())
-Or run:
-python main.py
-📁 Project Structure
-.
-├── engine.py # Render loop + ticking
-├── state.py # Reactive state management
-├── renderer.py # Diffing and render pipeline
-├── io.py # InputStream listener system
-├── events.py # Dispatch and animation loop base
-├── graphics.py # Rects, text, and drawing primitives
-├── allocator.py # Allocation and block registration
-├── primitives.py # Base Renderable, Animatable, Tickable
-├── diffing.py # Diff algorithm for efficient redraw
-└── main.py # Sample application
+Or run: python main.py
 
 ### 🧩 Extend & Compose
 Custom renderables, animations, and state bindings can be composed like UI widgets. You can:
